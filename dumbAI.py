@@ -2,7 +2,7 @@ import Player
 import numpy as np
 
 class dumbAI(Player.iPlayer):
-    def __init__(self,name,money):
+    def __init__(self,money,name):
         super().__init__(money,name)
 
     def initial_bet(self):

@@ -2,7 +2,7 @@ import Player
 import numpy as np
 
 class Dealer(Player.iPlayer):
-    def __init__(self,name,money):
+    def __init__(self,money, name = "Arjun"):
         self.name = name
         self.money = money
         self.game_state = None
