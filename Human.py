@@ -3,29 +3,11 @@
 import Player
 
 class Human(Player.iPlayer):
-    def __init__(self, money, name='lowly human', cards, others, profile):
-        """ A Player has a name and a certain capital. They will know what
-            cards they have revealed, and what others' cards are revealed.
-            profile is the PlayerProfile for AI handling."""
+    def __init__(self, money, name='lowly human'):
+        """ An instance of a human player."""
+        super().__init__(money,name)
 
-        self.name = str(name)
-        self.money = money
-        # The following fields were initialized as fields here so that
-        # the player has enough information without having access to the full game state.
-        # That implies the Game Controller would have to update the player fields.
-        self.cards = cards
-        self.others = others
-        self.profile = profile
-
-    def get_state():
-        """returns a summary of the state visible to this player."""
-        pass
-
-    def print_game_state():
-        """prints the state visible to this player."""
-        s = self.get_state()
-
-    def initial_bet():
+    def initial_bet(self):
         """prompts human player for initial bet, return integer."""
         while True:
             ans = input('How much do you want to bet?')
@@ -39,7 +21,7 @@ class Human(Player.iPlayer):
                     self.money-=bet
                     return bet
     
-    def to_hit(state, hand):
+    def to_hit(self, game_state, player_hand):
         """ Returns True if the player hits, False otherwise."""
         while True:
             print('Choose your action from below:\n\n'+
@@ -54,3 +36,11 @@ class Human(Player.iPlayer):
                 return False
             else:
                 print("Sorry, I'm afraid I cannot do that...because I don't understand.")
+
+    def print_game_state(self, game_state):
+        """prints the state visible to this player."""
+        s = self.get_state()
+
+    def get_state(self):
+        """returns a summary of the state visible to this player."""
+        pass
