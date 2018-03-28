@@ -10,7 +10,7 @@ class Human(Player.iPlayer):
     def initial_bet(self):
         """prompts human player for initial bet, return integer."""
         while True:
-            ans = input('How much do you want to bet?')
+            ans = input('How much do you want to bet?\n')
             if not ans.isdigit():
                 print('That\'s not real money!')
             else:
@@ -35,11 +35,11 @@ class Human(Player.iPlayer):
             elif ans in ['fold','"fold"','f']:
                 return False
             else:
-                print("Sorry, I'm afraid I cannot do that...because I don't understand.")
+                print("Sorry, I'm afraid I cannot do that...because I don't understand.\n")
 
     def print_game_state(self, game_state):
         """prints the state visible to this player."""
-        s = self.get_state()
+        pass
 
     def get_state(self):
         """returns a summary of the state visible to this player."""
