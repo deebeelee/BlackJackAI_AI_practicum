@@ -74,9 +74,9 @@ class BlackjackGame():
 	def get_state(self):
 		state = np.empty(3 * len(self.players) + 2)
 		for i, player in enumerate(self.players):
-			state[i] = self.visible[player.get_id()]
-			state[i+1] = np.sum(self.hands[player.get_id()]) - 1
-			state[i+2] = self.bets[player.get_id()]
+			state[3*i] = self.visible[player.get_id()]
+			state[3*i+1] = np.sum(self.hands[player.get_id()]) - 1
+			state[3*i+2] = self.bets[player.get_id()]
 		dealer_start = 3 * len(self.players)
 		state[dealer_start] = self.visible[self.dealer.get_id()]
 		state[dealer_start + 1] = np.sum(self.hands[self.dealer.get_id()])
