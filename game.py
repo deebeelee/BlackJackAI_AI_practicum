@@ -1,6 +1,27 @@
 import numpy as np
 import random
 
+def score_hand(hand):
+	score = 0
+	num_aces = 0
+	for i, v in enumerate(hand):
+		if i == 0:
+			num_aces = v
+			score += v
+		elif i >= 10:
+			score += 10 * v
+		else:
+			score += (i+1) * v
+
+	while(score <= 12 and num_aces > 0):
+		score += 9
+		num_aces -= 1
+	if(score > 21):
+		score = -1
+	elif(np.sum(hand) == 5 and score <= 21):
+		score = 22
+	return score
+
 class BlackjackGame():
 
 	def __init__(self, player_list, dealer):
@@ -27,62 +48,45 @@ class BlackjackGame():
 				wins[i] = 1
 		return wins
 
-	def score_hand(hand):
-		score = 0
-		num_aces = 0
-		for i, v in enumerate(hand):
-			if i == 0:
-				num_aces = v
-				score += v
-			elif i >= 10:
-				score += 10 * v
-			else:
-				score += (i+1) * v
-
-		while(score <= 12 and num_aces > 0):
-			score += 9
-			num_aces -= 1
-		if(score > 21):
-			score = -1
-		elif(np.sum(hand) == 5 and score <= 21):
-			score = 22
-		return score
-
 	def deal(self, player):
-		card = random.choice(np.nonzero(self.deck))
+		card = random.choice(np.nonzero(self.deck)[0])
 		self.deck[card] = 0
-		self.hand[player.get_id()][card%13] += 1
+		self.hands[player.get_id()][card%13] += 1
 		if(not (player.get_id() in self.visible)):
 			self.visible[player.get_id()] = card%13
 
 	def play_game(self):
-		self.bets = []
-		for player in self.player_list:
-			self.bets.append(player.initial_bet())
+		self.bets = {}
+		for player in self.players:
+			self.bets[player.get_id()] = player.initial_bet()
 
-		for player in self.player_list:
-			deal(self, player)
-			deal(self, player)
-		for player in self.player_list:
-			while(np.sum(self.hands[player.get_id()]) < 5 and player.to_hit()):
-				deal(self, player)
-		while(np.sum(self.hands[dealer.get_id()]) < 5 and dealer.to_hit()):
-			deal(self, dealer)
+		for player in self.players:
+			self.deal(player)
+			self.deal(player)
+		self.deal(self.dealer)
+		self.deal(self.dealer)
+		for player in self.players:
+			while(np.sum(self.hands[player.get_id()]) < 5 and player.to_hit(self.get_state(), self.hands[player.get_id()])):
+				self.deal(player)
+		while(np.sum(self.hands[self.dealer.get_id()]) < 5 and self.dealer.to_hit(self.get_state(), self.hands[player.get_id()])):
+			self.deal(self.dealer)
 
 	def get_state(self):
-		state = np.empty(3 * len(player_list) + 2)
-		for i, player in enumerate(self.player_list):
+		state = np.empty(3 * len(self.players) + 2)
+		for i, player in enumerate(self.players):
 			state[i] = self.visible[player.get_id()]
 			state[i+1] = np.sum(self.hands[player.get_id()]) - 1
 			state[i+2] = self.bets[player.get_id()]
-		dealer_start = 3 * len(player_list)
+		dealer_start = 3 * len(self.players)
 		state[dealer_start] = self.visible[self.dealer.get_id()]
 		state[dealer_start + 1] = np.sum(self.hands[self.dealer.get_id()])
 		return state
 
-	def print_game():
-		for player in self.player_list:
-			print('Player %s \'s cards')
-			print(np.where(self.hands[player.get_id()]))
+	def print_game(self):
+		print('Deck status')
+		print(self.deck)
+		for player in self.players:
+			print('Player %s \'s cards' % player.get_id())
+			print(self.hands[player.get_id()])
 
  
