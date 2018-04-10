@@ -20,13 +20,16 @@ class seventeenHits(Player.iPlayer):
 
     def print_game_state(self,game_state):
         pass
-    
-    def get_hand_score(self,player_hand):
-        score = 0
-        for k in range(13):
-            if(player_hand[k] == 1):
-                score += (k+1)
-        return score
-        
+      
     def get_state(self):
         pass
+    def get_hand_score(self,player_hand):
+        score = 0
+        for i,v in enumerate(player_hand):
+            if i == 0:
+                score += v
+            elif i >= 10:
+                score += 10*v
+            else:
+                score += (i+1)*v
+        return score
