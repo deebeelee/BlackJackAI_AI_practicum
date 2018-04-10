@@ -20,6 +20,8 @@ def score_hand(hand):
 		score = -1
 	elif(np.sum(hand) == 5 and score <= 21):
 		score = 22
+	if(score == 21 and np.sum(hand) == 2):
+		score = 23
 	return score
 
 class BlackjackGame():
@@ -42,6 +44,7 @@ class BlackjackGame():
 		wins = np.zeros(len(self.players))
 		for i, player in enumerate(self.players):
 			score = score_hand(self.hands[player.get_id()])
+			
 			if(score == dealer_score):
 				wins[i] = -1
 			elif(score > dealer_score):
@@ -53,7 +56,7 @@ class BlackjackGame():
 		self.deck[card] = 0
 		self.hands[player.get_id()][card%13] += 1
 		if(not (player.get_id() in self.visible)):
-			self.visible[player.get_id()] = card%13
+			self.visible[player.get_id()] = self.hands[player.get_id()].copy()
 
 	def play_game(self):
 		self.bets = {}
@@ -72,14 +75,15 @@ class BlackjackGame():
 			self.deal(self.dealer)
 
 	def get_state(self):
-		state = np.empty(3 * len(self.players) + 2)
+		state = np.empty(15 * len(self.players) + 14)
 		for i, player in enumerate(self.players):
-			state[3*i] = self.visible[player.get_id()]
-			state[3*i+1] = np.sum(self.hands[player.get_id()]) - 1
-			state[3*i+2] = self.bets[player.get_id()]
-		dealer_start = 3 * len(self.players)
-		state[dealer_start] = self.visible[self.dealer.get_id()]
-		state[dealer_start + 1] = np.sum(self.hands[self.dealer.get_id()])
+			player_start = 15*i
+			state[player_start:player_start+13] = self.visible[player.get_id()]
+			state[player_start+13] = np.sum(self.hands[player.get_id()]) - 1
+			state[player_start+14] = self.bets[player.get_id()]
+		dealer_start = 15 * len(self.players)
+		state[dealer_start:dealer_start+13] = self.visible[self.dealer.get_id()]
+		state[dealer_start+13] = np.sum(self.hands[self.dealer.get_id()]) - 1
 		return state
 
 	def print_game(self):
@@ -88,5 +92,7 @@ class BlackjackGame():
 		for player in self.players:
 			print('Player %s \'s cards' % player.get_id())
 			print(self.hands[player.get_id()])
+		print('Dealer\'s hand')
+		print(self.hands[self.dealer.get_id()])
 
  
