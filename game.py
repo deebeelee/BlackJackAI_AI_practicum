@@ -13,8 +13,8 @@ def score_hand(hand):
 		else:
 			score += (i+1) * v
 
-	while(score <= 12 and num_aces > 0):
-		score += 9
+	while(score < 12 and num_aces > 0):
+		score += 10
 		num_aces -= 1
 	if(score > 21):
 		score = -1
