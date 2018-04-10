@@ -153,9 +153,9 @@ class BlackjackGame():
 	def get_profit(self, wins):
 		profit = 0
 		for i, player in enumerate(self.players):
-			self.dealer_profit += wins[i] * self.bets[player.get_id()]
+			self.dealer_profit -= wins[i] * self.bets[player.get_id()]
 
-	
+
 
 	def print_game(self):
 		print('Deck status')
