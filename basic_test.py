@@ -7,7 +7,7 @@ from seventeenHit import seventeenHits
 dealer = dumbAI(200, 'd')
 p1 = fifteenHits(200, 'p1')
 p2 = seventeenHits(200, 'p2')
-p3 = dumbAI(200, 'p3')
+p3 = DBAI(200, 'p3')
 p4 = dumbAI(200, 'p4')
 players = [p1, p2, p3, p4]
 game = game.BlackjackGame(players, dealer)
