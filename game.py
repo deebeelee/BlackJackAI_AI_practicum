@@ -137,7 +137,7 @@ class BlackjackGame():
 			player_start = 15*i
 			state[player_start:player_start+13] = self.visible[player.get_id()]
 			state[player_start+13] = np.sum(self.hands[player.get_id()]) - 1
-			stae[player_start+14] = self.bets[player.get_id()]
+			state[player_start+14] = self.bets[player.get_id()]
 		dealer_start = 15 * len(self.players)
 		state[dealer_start:dealer_start+13] = self.visible[self.dealer.get_id()]
 		state[dealer_start+13] = np.sum(self.hands[self.dealer.get_id()]) - 1
