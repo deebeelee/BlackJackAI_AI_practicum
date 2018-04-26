@@ -1,16 +1,18 @@
 import game as gg
 from dumbAI import dumbAI
-from fifteenHit import fifteenHits
-from seventeenHit import seventeenHits
+from fourteenHits import fourteenHits
+from fifteenHits import fifteenHits
+from sixteenHits import sixteenHits
+from seventeenHits import seventeenHits
 from Dealer import Dealer
 from DBAI import DBAI
 from tabularAI import tabularAI
 
-dealer = dumbAI(200,'dealer')
-p1 = DBAI(200,'p1')
+dealer = tabularAI(200,'dealer')
+p1 = fourteenHits(200,'p1')
 p2 = fifteenHits(200,'p2')
-p3 = seventeenHits(200,'p3')
-p4 = tabularAI(200,'p4')
+p3 = sixteenHits(200,'p3')
+p4 = seventeenHits(200,'p4')
 players = [p1, p2, p3, p4]
 total_wins = [0,0,0,0]
 total_losses = [0,0,0,0]
