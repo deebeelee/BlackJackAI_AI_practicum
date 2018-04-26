@@ -130,10 +130,12 @@ class BlackjackGame():
 		for player in self.players:
 			self.bets[player.get_id()] = 0
 			self.hands[player.get_id()] = np.zeros(13)
+		self.deck = np.ones(52)
 
 	def play_games(self, n_iter):
 		for i in range(n_iter):
 			self.play_game()
+			self.get_profit()
 			self.clear_game()
 
 	def get_state(self):
