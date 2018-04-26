@@ -13,13 +13,13 @@ def select_player():
 	initial_money = 200
 	if choice == 0:
 		return fifteenHit(initial_money, 'fifteen')
-	if choice == 1:
+	elif choice == 1:
 		return DBAI(initial_money, 'DB')
-	if choice == 2:
+	elif choice == 2:
 		return seventeenHit(initial_money, 'seventeen')
-	if choice == 3:
+	elif choice == 3:
 		return dumbAI(initial_money, 'dumb')
-	if chioce == 4:
+	else:
 		return tabularAI(initial_money, 'tabular')
 
 def eval_genomes(genomes, config):
