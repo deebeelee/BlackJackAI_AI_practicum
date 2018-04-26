@@ -1,3 +1,4 @@
+import os
 import game as gg
 from dumbAI import dumbAI
 from fourteenHits import fourteenHits
@@ -7,8 +8,16 @@ from seventeenHits import seventeenHits
 from Dealer import Dealer
 from DBAI import DBAI
 from tabularAI import tabularAI
+from smart_dealer import SmartDealer
+import neatTrain
 
-dealer = DBAI(200,'dealer')
+configuration_file = os.path.join( os.path.dirname(__file__), 'config-feedforward')
+
+neural_net = neatTrain.run(configuration_file)
+
+
+
+dealer = SmartDealer(neural_net,'dealer')
 p1 = fourteenHits(200,'p1')
 p2 = fifteenHits(200,'p2')
 p3 = sixteenHits(200,'p3')

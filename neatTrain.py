@@ -3,8 +3,8 @@ import random
 from game import BlackjackGame
 from DBAI import DBAI
 from dumbAI import dumbAI
-from seventeenHit import seventeenHit
-from fifteenHit import fifteenHit
+from seventeenHits import seventeenHits
+from fifteenHits import fifteenHits
 from tabularAI import tabularAI
 from smart_dealer import SmartDealer
 
@@ -12,11 +12,11 @@ def select_player():
 	choice = random.randint(0,4)
 	initial_money = 200
 	if choice == 0:
-		return fifteenHit(initial_money, 'fifteen')
+		return fifteenHits(initial_money, 'fifteen')
 	elif choice == 1:
 		return DBAI(initial_money, 'DB')
 	elif choice == 2:
-		return seventeenHit(initial_money, 'seventeen')
+		return seventeenHits(initial_money, 'seventeen')
 	elif choice == 3:
 		return dumbAI(initial_money, 'dumb')
 	else:
@@ -59,5 +59,7 @@ def run(config_file):
     winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
     
 
-    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
-    p.run(eval_genomes, 10)
+    #p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
+    #p.run(eval_genomes, 10)
+    
+    return winner_net
