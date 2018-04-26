@@ -15,7 +15,7 @@ configuration_file = os.path.join( os.path.dirname(__file__), 'config-feedforwar
 
 neural_net = neatTrain.run(configuration_file)
 
-
+print("We are done training the neural network.")
 
 dealer = SmartDealer(neural_net,'dealer')
 p1 = fourteenHits(200,'p1')

@@ -135,7 +135,6 @@ class BlackjackGame():
 	def play_games(self, n_iter):
 		for i in range(n_iter):
 			self.play_game()
-			self.get_profit()
 			self.clear_game()
 
 	def get_state(self):

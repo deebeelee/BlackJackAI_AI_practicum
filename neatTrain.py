@@ -30,7 +30,7 @@ def eval_genomes(genomes, config):
 		net = neat.nn.FeedForwardNetwork.create(genome, config)
 		dealer = SmartDealer(net, 'Smart')
 		game = BlackjackGame(player_list, dealer)
-		game.play_games(1000)
+		game.play_games(10)
 		genome.fitness = game.dealer_profit
 
 def run(config_file):
@@ -38,18 +38,25 @@ def run(config_file):
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_file)
+    print("We have loaded in the configuration file.")
 
     # Create the population, which is the top-level object for a NEAT run.
     p = neat.Population(config)
+    
+    print("We have loaded in the sample population.")
 
     # Add a stdout reporter to show progress in the terminal.
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(5))
+    
+    print("We are about to run the eval genome function.")
 
     # Run for up to 300 generations.
     winner = p.run(eval_genomes, 300)
+    
+    print("WE have finished running eval genomes.")
 
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
