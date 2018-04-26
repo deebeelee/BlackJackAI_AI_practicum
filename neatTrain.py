@@ -30,7 +30,7 @@ def eval_genomes(genomes, config):
 		net = neat.nn.FeedForwardNetwork.create(genome, config)
 		dealer = SmartDealer(net, 'Smart')
 		game = BlackjackGame(player_list, dealer)
-		game.play_games(10)
+		game.play_games(100)
 		genome.fitness = game.dealer_profit
 
 def run(config_file):
@@ -49,12 +49,12 @@ def run(config_file):
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
-    p.add_reporter(neat.Checkpointer(5))
+    p.add_reporter(neat.Checkpointer(100))
     
     print("We are about to run the eval genome function.")
 
     # Run for up to 300 generations.
-    winner = p.run(eval_genomes, 300)
+    winner = p.run(eval_genomes, 1000)
     
     print("WE have finished running eval genomes.")
 
