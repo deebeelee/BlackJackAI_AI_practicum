@@ -8,7 +8,7 @@ from Dealer import Dealer
 from DBAI import DBAI
 from tabularAI import tabularAI
 
-dealer = tabularAI(200,'dealer')
+dealer = DBAI(200,'dealer')
 p1 = fourteenHits(200,'p1')
 p2 = fifteenHits(200,'p2')
 p3 = sixteenHits(200,'p3')
