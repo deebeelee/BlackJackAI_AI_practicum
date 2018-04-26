@@ -9,8 +9,8 @@ class fifteenHits(Player.iPlayer):
         super().__init__(money,name)
 
     def initial_bet(self):
-        # Bets 70 % of whatever he has
-        return 0.7*self.money
+        # Bets 50 % of whatever he has
+        return 0.5*self.money
 
     def to_hit(self, game_state, player_hand):
         if(self.get_hand_score(player_hand) < 15):

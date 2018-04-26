@@ -6,8 +6,8 @@ class dumbAI(Player.iPlayer):
         super().__init__(money,name)
 
     def initial_bet(self):
-        # Bets 90 % of whatever he has
-        return 0.9*self.money
+        # Bets 50 % of whatever he has
+        return 0.5*self.money
 
     def to_hit(self, game_state, player_hand):
         toHitOrNotToHit = np.random.rand(1)

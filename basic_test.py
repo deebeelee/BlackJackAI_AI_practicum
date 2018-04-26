@@ -15,6 +15,7 @@ players = [p1, p2, p3, p4]
 total_wins = [0,0,0,0]
 total_losses = [0,0,0,0]
 total_draws = [0,0,0,0]
+total_win_loss_ratio = [0.0,0.0,0.0,0.0]
 for i in range(10000):
     game = gg.BlackjackGame(players, dealer)
     #game.print_game()
@@ -35,7 +36,11 @@ for i in range(10000):
     #print(game.check_wins())
 
 print("Game statistics")
+
+for i in range(4):
+    total_win_loss_ratio[i] = (total_wins[i])/(total_losses[i])
 print(total_wins)
 print(total_draws)
 print(total_losses)
+print(total_win_loss_ratio)
 
