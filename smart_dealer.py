@@ -8,7 +8,7 @@ class SmartDealer(Player.iPlayer):
     def initial_bet(self):
         return 0 
     def to_hit(self, game_state, player_hand):
-        return model.activate(np.concatenate((game_state, player_hand))) >= 0
+        return model.activate(np.concatenate((game_state, player_hand))) >= 0.5
     def print_game_state(self,game_state):
         pass
     def get_state(self):

@@ -32,3 +32,32 @@ def eval_genomes(genomes, config):
 		game = BlackjackGame(player_list, dealer)
 		game.play_games(1000)
 		genome.fitness = game.dealer_profit
+
+def run(config_file):
+    # Load configuration.
+    config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                         neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                         config_file)
+
+    # Create the population, which is the top-level object for a NEAT run.
+    p = neat.Population(config)
+
+    # Add a stdout reporter to show progress in the terminal.
+    p.add_reporter(neat.StdOutReporter(True))
+    stats = neat.StatisticsReporter()
+    p.add_reporter(stats)
+    p.add_reporter(neat.Checkpointer(5))
+
+    # Run for up to 300 generations.
+    winner = p.run(eval_genomes, 300)
+
+    # Display the winning genome.
+    print('\nBest genome:\n{!s}'.format(winner))
+
+    # Show output of the most fit genome against training data.
+    print('\nOutput:')
+    winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
+    
+
+    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
+    p.run(eval_genomes, 10)
