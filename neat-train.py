@@ -27,8 +27,8 @@ def eval_genomes(genomes, config):
 	for i in range(4):
 		player_list.append(select_player())
 	for genome_id, genome in genomes:
-		genome.fitness = 4.0
 		net = neat.nn.FeedForwardNetwork.create(genome, config)
+		dealer = SmartDealer(net, 'Smart')
 		game = BlackjackGame(player_list, dealer)
 		game.play_games(1000)
 		genome.fitness = game.dealer_profit

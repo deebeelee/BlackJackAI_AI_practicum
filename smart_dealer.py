@@ -2,8 +2,8 @@ import Player
 import numpy as np
 
 class SmartDealer(Player.iPlayer):
-    def __init__(self, model):
-        super().__init__(money,name)
+    def __init__(self, model, name):
+        super().__init__(0, name)
         self.model = model
     def initial_bet(self):
         return 0 
