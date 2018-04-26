@@ -131,6 +131,11 @@ class BlackjackGame():
 			self.bets[player.get_id()] = 0
 			self.hands[player.get_id()] = np.zeros(13)
 
+	def play_games(self, n_iter):
+		for i in range(n_iter):
+			self.play_game()
+			self.clear_game()
+
 	def get_state(self):
 		state = np.empty(15 * len(self.players) + 14)
 		for i, player in enumerate(self.players):
@@ -154,8 +159,6 @@ class BlackjackGame():
 		profit = 0
 		for i, player in enumerate(self.players):
 			self.dealer_profit -= wins[i] * self.bets[player.get_id()]
-
-
 
 	def print_game(self):
 		print('Deck status')
