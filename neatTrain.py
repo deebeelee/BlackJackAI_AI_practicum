@@ -8,8 +8,7 @@ from fifteenHits import fifteenHits
 from tabularAI import tabularAI
 from smart_dealer import SmartDealer
 
-def select_player():
-	choice = random.randint(0,4)
+def select_player(choice):
 	initial_money = 200
 	if choice == 0:
 		return fifteenHits(initial_money, 'fifteen')
@@ -18,14 +17,14 @@ def select_player():
 	elif choice == 2:
 		return seventeenHits(initial_money, 'seventeen')
 	elif choice == 3:
-		return dumbAI(initial_money, 'dumb')
+		return tabularAI(initial_money, 'dumb')
 	else:
-		return tabularAI(initial_money, 'tabular')
+		return dumbAI(initial_money, 'tabular')
 
 def eval_genomes(genomes, config):
 	player_list = []
 	for i in range(4):
-		player_list.append(select_player())
+		player_list.append(select_player(i))
 	for genome_id, genome in genomes:
 		net = neat.nn.FeedForwardNetwork.create(genome, config)
 		dealer = SmartDealer(net, 'Smart')
