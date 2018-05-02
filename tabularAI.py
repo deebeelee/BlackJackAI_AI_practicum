@@ -18,7 +18,7 @@ class tabularAI(Player.iPlayer):
 
     def initial_bet(self):
         # Bets 90 % of whatever he has
-        return 0.5*self.money
+        return 1
 
     def to_hit(self, game_state, player_hand):
         player_score = self.get_hand_score(player_hand)

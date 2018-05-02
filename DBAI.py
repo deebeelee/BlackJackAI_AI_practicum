@@ -32,8 +32,7 @@ class DBAI(Player.iPlayer):
 
     def initial_bet(self):
         # Bets 50 % of whatever he has
-        return 0.5*self.money
-
+        return 1
     def to_hit(self, game_state, player_hand):
         score = score_hand(player_hand)
         # decide probabilistically only if it is possible to bust

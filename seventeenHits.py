@@ -10,7 +10,7 @@ class seventeenHits(Player.iPlayer):
 
     def initial_bet(self):
         # Bets 50 % of whatever he has
-        return 0.5*self.money
+        return 1
 
     def to_hit(self, game_state, player_hand):
         if(self.get_hand_score(player_hand) < 17):
