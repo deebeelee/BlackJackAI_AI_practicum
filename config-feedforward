@@ -52,8 +52,8 @@ num_outputs             = 1
 # node response options
 response_init_mean      = 0.0
 response_init_stdev     = 1.0
-response_max_value      = 30.0
-response_min_value      = -30.0
+response_max_value      = 2.0
+response_min_value      = -2.0
 response_mutate_power   = 0.00
 response_mutate_rate    = 0.00
 response_replace_rate   = 0.00
@@ -61,8 +61,8 @@ response_replace_rate   = 0.00
 # connection weight options
 weight_init_mean        = 0.0
 weight_init_stdev       = 1.0
-weight_max_value        = 30
-weight_min_value        = -30
+weight_max_value        = 2
+weight_min_value        = -2
 weight_mutate_power     = 0.0
 weight_mutate_rate      = 0.0
 weight_replace_rate     = 0.0

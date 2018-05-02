@@ -30,7 +30,8 @@ def eval_genomes(genomes, config):
 		net = neat.nn.FeedForwardNetwork.create(genome, config)
 		dealer = SmartDealer(net, 'Smart')
 		game = BlackjackGame(player_list, dealer)
-		game.play_games(10)
+		game.play_games(100)
+    #    print("In this iteration, genome" + str(genome_id) + " won " + game.get_profit() + " .")
 		genome.fitness = game.dealer_profit
 
 def run(config_file):
