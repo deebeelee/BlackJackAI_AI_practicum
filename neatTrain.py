@@ -8,6 +8,8 @@ from fifteenHits import fifteenHits
 from tabularAI import tabularAI
 from smart_dealer import SmartDealer
 
+genome_fitness_array = []
+
 def select_player(choice):
 	initial_money = 200
 	if choice == 0:
@@ -17,9 +19,9 @@ def select_player(choice):
 	elif choice == 2:
 		return seventeenHits(initial_money, 'seventeen')
 	elif choice == 3:
-		return tabularAI(initial_money, 'dumb')
+		return tabularAI(initial_money, 'tabular')
 	else:
-		return dumbAI(initial_money, 'tabular')
+		return dumbAI(initial_money, 'dumb')
 
 def eval_genomes(genomes, config):
 	player_list = []
@@ -32,6 +34,7 @@ def eval_genomes(genomes, config):
 		game.play_games(100)
     #    print("In this iteration, genome" + str(genome_id) + " won " + game.get_profit() + " .")
 		genome.fitness = game.dealer_profit
+##        genome_fitness_array.append(genome.fitness)
 
 def run(config_file):
     # Load configuration.
